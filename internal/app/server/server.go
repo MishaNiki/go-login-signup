@@ -8,15 +8,16 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
+var (
+	templLogin  *template.Template
+	templSignup *template.Template
+)
+
 // Server ...
 type Server struct {
 	config *Config
 	router *http.ServeMux // главный роутер
 }
-
-var (
-	templLogin *template.Template
-)
 
 // New ...
 func New(config *Config) *Server {
@@ -29,7 +30,7 @@ func New(config *Config) *Server {
 // Start ...
 func (serv *Server) Start() error {
 	templLogin = template.Must(template.ParseFiles("web/template/login.html"))
-
+	templSignup = template.Must(template.ParseFiles("web/template/signup.html"))
 	serv.configureRouter()
 	return http.ListenAndServe(serv.config.BindPort, serv.router)
 }
@@ -40,6 +41,7 @@ func (serv *Server) configureRouter() {
 
 	StdAPiHandler.HandleFunc("/", Login)
 	StdAPiHandler.HandleFunc("/profile", Profile)
+	StdAPiHandler.HandleFunc("/signup", Signup)
 	ApiHandler.GET("/hello/:name", Hello)
 
 	serv.router.Handle("/", StdAPiHandler)
@@ -59,6 +61,20 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	http.Redirect(w, r, "/profile", http.StatusFound)
+}
+
+// Signup ...
+func Signup(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		logEr := ""
+		templSignup.Execute(w,
+			struct {
+				LogError string
+			}{
+				logEr,
+			})
+		return
+	}
 }
 
 // Profile ...

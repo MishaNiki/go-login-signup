@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>login</title>
+	<title>signup</title>
 	<meta charset="utf-8">
-	<link rel="stylesheet" type="text/css" href="../styles/forms.css">
+	<link rel="stylesheet" type="text/css" href="http://localhost/stylesheets/forms.css">
 </head>
 <body>
 	<form action="/signup" method="post" class="forms" id="signup">
@@ -13,7 +13,10 @@
 		<input type="password" name="password">
 		<label>Repeat password</label>
 		<input type="password" name="repeat-password">
-		<input type="button" name="signup" value="Sign up">
+		<div class="buttons">
+			<a onclick="document.getElementById('login').submit(); return false;" class="link">Sign up</a>
+		</div>
+		<label style="color: red;">{{.LogError}}</label>
 	</form>
 </body>
 </html>
