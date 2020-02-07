@@ -18,12 +18,12 @@ func init() {
 func main() {
 	flag.Parse()
 
-	config := server.NewConfig()
-	if err := config.DecodeJFile(configPath); err != nil {
+	sconfig := server.NewConfig()
+	if err := sconfig.DecodeJSONConf(configPath); err != nil {
 		log.Fatal(err)
 	}
 
-	s := server.New(config)
+	s := server.New(sconfig)
 	if err := s.Start(); err != nil {
 		log.Fatal(err)
 	}

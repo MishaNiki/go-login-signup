@@ -4,19 +4,29 @@ import (
 	"encoding/json"
 	"io"
 	"os"
+
+	"github.com/MishaNiki/go-login-signup/internal/app/mail"
+	"github.com/MishaNiki/go-login-signup/internal/app/storage"
 )
 
+// Config ...
 type Config struct {
 	BindPort string `json:"bind_port"`
+	Storage  *storage.Config
+	Mail     *mail.Config
 }
 
+// NewConfig ...
 func NewConfig() *Config {
 	return &Config{
 		BindPort: ":8085",
+		Storage:  storage.NewConfig(),
+		Mail:     mail.NewConfig(),
 	}
 }
 
-func (config *Config) DecodeJFile(configPath string) error {
+// DecodeJSONConf ...
+func (config *Config) DecodeJSONConf(configPath string) error {
 	file, err := os.Open(configPath)
 	if err != nil {
 		return err
