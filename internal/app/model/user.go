@@ -12,6 +12,7 @@ type User struct {
 	Email             string
 	Password          string
 	EncryptedPassword string
+	IDSession         string
 }
 
 // Validation ...
