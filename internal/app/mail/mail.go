@@ -1,13 +1,12 @@
 package mail
 
 import (
-	"log"
 	"net/smtp"
 )
 
-// Email ...
+// Mail ...
 type Mail struct {
-	Auth     stmp.Auth
+	Auth     smtp.Auth
 	Host     string
 	Port     string
 	Email    string
@@ -24,7 +23,7 @@ func New(config *Config) *Mail {
 			config.Host,
 		),
 		Host:  config.Host,
-		Port:  config.Post,
+		Port:  config.Port,
 		Email: config.Email,
 	}
 }
@@ -32,21 +31,20 @@ func New(config *Config) *Mail {
 // Ping ...
 func (mail *Mail) Ping() error {
 
-	err = smtp.SendMail(
+	err := smtp.SendMail(
 		mail.Host+mail.Port,
 		mail.Auth,
 		mail.Email,
 		[]string{mail.Email},
 		[]byte("From: Ping <"+mail.Email+"> \r\n"+
 			"To:"+mail.Email+"\r\n"+
-			"Subject: Mail Check\r\n"+
-		)
+			"Subject: Mail Check\r\n"),
+	)
 	if err != nil {
 		return err
 	}
 	return nil
 }
-
 
 // User ...
 // templete : mail.User().SendingURL('', '')

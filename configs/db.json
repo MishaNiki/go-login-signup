@@ -1,0 +1,3 @@
+{
+    "DB_URL" : "user=postgres password=postgres dbname=gologin sslmode=disable"
+}

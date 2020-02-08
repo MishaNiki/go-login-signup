@@ -1,0 +1,8 @@
+{
+    "bind_port" :       ":8086",
+    "DB_URL" :          "user=postgres password=postgres dbname=gologin sslmode=disable",
+    "email" :           "mikhaelNlikishkin12@gmail.com",
+    "password_email" :  "ErRE80rr0m1r",
+    "host_mail" :       "smtp.gmail.com",
+    "post_mail" :       ":587"
+}
