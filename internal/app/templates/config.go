@@ -1,4 +1,4 @@
-package tepmplates
+package templates
 
 // Config ...
 type Config struct {

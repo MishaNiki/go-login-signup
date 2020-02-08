@@ -6,24 +6,27 @@ import (
 	"net/http"
 
 	"github.com/MishaNiki/go-login-signup/internal/app/mail"
+	"github.com/MishaNiki/go-login-signup/internal/app/session"
 	"github.com/MishaNiki/go-login-signup/internal/app/storage"
 	"github.com/MishaNiki/go-login-signup/internal/app/templates"
 )
 
 // Server ...
 type Server struct {
-	config *Config
-	router *http.ServeMux
-	mail   *mail.Mail
-	stor   *storage.Storage
-	templ  *templates.Templates
+	config  *Config
+	router  *http.ServeMux
+	mail    *mail.Mail
+	stor    *storage.Storage
+	templ   *templates.Templates
+	session *session.Session
 }
 
 // New ...
 func New(config *Config) *Server {
 	return &Server{
-		config: config,
-		router: http.NewServeMux(),
+		config:  config,
+		router:  http.NewServeMux(),
+		session: session.New(),
 	}
 }
 
@@ -39,6 +42,11 @@ func (serv *Server) Start() error {
 
 	// конфигурация и подключение к почтовому ящику с которого будет произведена рассылка
 	if err := serv.configureMail(); err != nil {
+		return err
+	}
+
+	// конфигуранция шаблонов страниц перед началом работы сервера
+	if err := serv.configureTemplates(); err != nil {
 		return err
 	}
 
@@ -87,5 +95,10 @@ func (serv *Server) configureMail() error {
 // configureTemplates ...
 func (serv *Server) configureTemplates() error {
 
+	templ, err := templates.New(serv.config.Templates)
+	if err != nil {
+		return err
+	}
+	serv.templ = templ
 	return nil
 }

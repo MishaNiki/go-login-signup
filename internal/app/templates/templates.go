@@ -1,11 +1,11 @@
-package tepmplates
+package templates
 
 import "html/template"
 
-// Tepmplates ...
+// Templates ...
 //type Tepmplates map[string]*template.Template
 // Tepmplates ...
-type Tepmplates struct {
+type Templates struct {
 	Login  *template.Template
 	SignUp *template.Template
 	Forgod *template.Template
@@ -13,11 +13,32 @@ type Tepmplates struct {
 }
 
 // New ...
-func New(config *Config) *Tepmplates {
-	return &Tepmplates{
-		Login:  template.Must(template.ParseFiles(config.Login)),
-		SignUp: template.Must(template.ParseFiles(config.SignUp)),
-		Forgod: template.Must(template.ParseFiles(config.Forgod)),
-		Home:   template.Must(template.ParseFiles(config.Home)),
+func New(config *Config) (*Templates, error) {
+
+	login, err := template.ParseFiles(config.Login)
+	if err != nil {
+		return nil, err
 	}
+
+	signup, err := template.ParseFiles(config.Login)
+	if err != nil {
+		return nil, err
+	}
+
+	forgod, err := template.ParseFiles(config.Login)
+	if err != nil {
+		return nil, err
+	}
+
+	home, err := template.ParseFiles(config.Login)
+	if err != nil {
+		return nil, err
+	}
+
+	return &Templates{
+		Login:  login,
+		SignUp: signup,
+		Forgod: forgod,
+		Home:   home,
+	}, nil
 }
