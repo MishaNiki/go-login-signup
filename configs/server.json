@@ -1,8 +1,15 @@
 {
     "bind_port" :       ":8086",
+
     "DB_URL" :          "user=postgres password=postgres dbname=gologin sslmode=disable",
-    "email" :           "mikhaelNlikishkin12@gmail.com",
-    "password_email" :  "ErRE80rr0m1r",
+
+    "email" :           "",
+    "password_email" :  "",
     "host_mail" :       "smtp.gmail.com",
-    "post_mail" :       ":587"
+    "post_mail" :       ":587",
+
+    "pg_login" :        "web/template/login.html",
+    "pg_signup":        "web/template/signup.html",
+    "pg_forgot":        "web/template/forgot.html",
+    "pg_home":          "web/template/home.html"
 }

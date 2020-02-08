@@ -7,6 +7,7 @@ import (
 
 	"github.com/MishaNiki/go-login-signup/internal/app/mail"
 	"github.com/MishaNiki/go-login-signup/internal/app/storage"
+	"github.com/MishaNiki/go-login-signup/internal/app/templates"
 )
 
 // Server ...
@@ -15,6 +16,7 @@ type Server struct {
 	router *http.ServeMux
 	mail   *mail.Mail
 	stor   *storage.Storage
+	templ  *templates.Templates
 }
 
 // New ...
@@ -79,5 +81,11 @@ func (serv *Server) configureMail() error {
 	}
 
 	serv.mail = mail
+	return nil
+}
+
+// configureTemplates ...
+func (serv *Server) configureTemplates() error {
+
 	return nil
 }

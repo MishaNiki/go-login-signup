@@ -7,21 +7,24 @@ import (
 
 	"github.com/MishaNiki/go-login-signup/internal/app/mail"
 	"github.com/MishaNiki/go-login-signup/internal/app/storage"
+	"github.com/MishaNiki/go-login-signup/internal/app/templates"
 )
 
 // Config ...
 type Config struct {
-	BindPort string `json:"bind_port"`
-	Storage  *storage.Config
-	Mail     *mail.Config
+	BindPort  string `json:"bind_port"`
+	Storage   *storage.Config
+	Mail      *mail.Config
+	Templates *templates.Config
 }
 
 // NewConfig ...
 func NewConfig() *Config {
 	return &Config{
-		BindPort: ":8085",
-		Storage:  storage.NewConfig(),
-		Mail:     mail.NewConfig(),
+		BindPort:  ":8085",
+		Storage:   storage.NewConfig(),
+		Mail:      mail.NewConfig(),
+		Templates: templates.NewConfig(),
 	}
 }
 
