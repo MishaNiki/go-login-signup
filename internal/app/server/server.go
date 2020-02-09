@@ -61,9 +61,10 @@ func (serv *Server) configureRouter() {
 	stdAPIHandler := http.NewServeMux()
 
 	// Создание обработчиков url для роутеров
-	stdAPIHandler.HandleFunc("/", Login)
-	stdAPIHandler.HandleFunc("/signup", Signup)
-	stdAPIHandler.HandleFunc("/profile", Profile)
+	stdAPIHandler.HandleFunc("/", serv.handleLogin())
+	stdAPIHandler.HandleFunc("/signup", serv.handleSignup())
+	stdAPIHandler.HandleFunc("/forgod", serv.handleForgod())
+	stdAPIHandler.HandleFunc("/home", serv.handleHome())
 
 	// слив всех роутеров в один главный
 	serv.router.Handle("/", stdAPIHandler)
