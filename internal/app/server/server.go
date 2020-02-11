@@ -9,16 +9,18 @@ import (
 	"github.com/MishaNiki/go-login-signup/internal/app/session"
 	"github.com/MishaNiki/go-login-signup/internal/app/storage"
 	"github.com/MishaNiki/go-login-signup/internal/app/templates"
+	"github.com/MishaNiki/go-login-signup/internal/app/treeusers"
 )
 
 // Server ...
 type Server struct {
-	config  *Config
-	router  *http.ServeMux
-	mail    *mail.Mail
-	stor    *storage.Storage
-	templ   *templates.Templates
-	session *session.Session
+	config   *Config
+	router   *http.ServeMux
+	mail     *mail.Mail
+	stor     *storage.Storage
+	templ    *templates.Templates
+	session  *session.Session
+	treeUser *treeusers.TreeUsers
 }
 
 // New ...
